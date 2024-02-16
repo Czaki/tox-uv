@@ -1,5 +1,8 @@
 [build-system]
-requires = ["hatchling"]
+requires = [
+  "hatch-vcs>=0.4",
+  "hatchling>=1.21",
+]
 build-backend = "hatchling.build"
 
 [project]
@@ -9,11 +12,14 @@ description = ''
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = []
+keywords = [
+  "testing"
+]
 authors = [
   { name = "Grzegorz Bokota", email = "bokota+github@gmail.com" },
 ]
 classifiers = [
+  "Framework :: tox",
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.8",
@@ -23,13 +29,21 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Testing",
 ]
-dependencies = []
+dependencies = [
+  "tox>=4,<5",
+  "uv",
+]
+
+[project.entry-points.tox]
+uv = "tox_uv.plugin"
+
 
 [project.urls]
-Documentation = "https://github.com/unknown/tox-uv#readme"
-Issues = "https://github.com/unknown/tox-uv/issues"
-Source = "https://github.com/unknown/tox-uv"
+Documentation = "https://github.com/czaki/tox-uv#readme"
+Issues = "https://github.com/czaki/tox-uv/issues"
+Source = "https://github.com/czaki/tox-uv"
 
 [tool.hatch.version]
 path = "src/tox_uv/__about__.py"
@@ -79,3 +93,32 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.8
+target-version = "py38"
+fix=true
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = [
+  "F", # Pyflakes
+  "E", "W", # pycodestyle
+  "C90", # McCabe complexity
+  "I", # Import order
+  "N", # Naming pep8
+  "D", # Docstyle
+  "UP", # pyupgrade
+  "PL", # pylint
+  "PERF", # perflint
+  "RUF", # ruff specific rules
+]
+ignore = ["D212", "D203"]
+
+[tool.ruff.format]
+docstring-code-format = true

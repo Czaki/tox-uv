@@ -10,6 +10,12 @@
 - [Installation](#installation)
 - [License](#license)
 
+## Usage
+
+```console
+$ tox run --runner uv-virtualenv
+```
+
 ## Installation
 
 ```console
