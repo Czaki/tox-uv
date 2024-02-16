@@ -1,7 +1,7 @@
 # tox-uv
 
-[![PyPI - Version](https://img.shields.io/pypi/v/tox-uv.svg)](https://pypi.org/project/tox-uv)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tox-uv.svg)](https://pypi.org/project/tox-uv)
+[![PyPI - Version](https://img.shields.io/pypi/v/tox-uv.svg)](https://pypi.org/project/tox-uv-)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tox-uv.svg)](https://pypi.org/project/tox-uv-)
 
 -----
 
@@ -29,7 +29,7 @@ package = wheel
 ## Installation
 
 ```console
-pip install tox-uv
+pip install git+https://github.com/czaki/tox-uv
 ```
 
 ## License
