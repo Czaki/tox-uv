@@ -68,7 +68,7 @@ class UVInstaller(Pip):
             self._env.conf.add_config(
                 keys=["list_dependencies_command"],
                 of_type=Command,
-                default=Command(["python", "-m", "pip", "uv", "freeze"]),
+                default=Command(["python", "-m", "uv", "pip", "freeze"]),
                 desc="command used to list installed packages",
             )
 
