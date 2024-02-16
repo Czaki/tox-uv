@@ -5,7 +5,8 @@ Implemented by overloading the pip installer to use uv instead of pip.
 """
 from __future__ import annotations
 
-from typing import Any
+import os.path
+from typing import Any, Sequence
 
 from tox.config.main import Config
 from tox.config.types import Command
@@ -77,6 +78,31 @@ class UVInstaller(Pip):
             ["python", "-I", "-m", "uv", "pip", "install", "{opts}", "{packages}"]
         )
         return self.post_process_install_command(cmd)
+
+    def install(self, arguments: Any, section: str, of_type: str) -> None:
+        """Install the package."""
+        return super().install(arguments, section, of_type)
+
+    def _execute_installer(self, deps: Sequence[Any], of_type: str) -> None:
+        """
+        Execute the installer.
+
+        This is hack as uv doe not support installing from path.
+        """
+        print("Executing with uv", deps, of_type)
+        if of_type == "package":
+            deps = [_path_to_spcyfications(dep) for dep in deps]
+        return super()._execute_installer(deps, of_type)
+
+
+def _path_to_spcyfications(path: str) -> str:
+    if not os.path.exists(path):
+        return path
+    if os.path.isfile(path):
+        file_name = os.path.basename(path)
+        name = file_name.split("-", maxsplit=1)[0]
+        return f"{name} @ {path}"
+    return path
 
 
 class UVVirtualEnvRunner(VirtualEnvRunner):

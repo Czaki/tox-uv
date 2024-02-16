@@ -13,8 +13,18 @@
 ## Usage
 
 ```console
-$ tox run --runner uv-virtualenv
+$ tox run -e env_spec --runner uv-virtualenv
 ```
+
+Based on experiments there are problems with using `uv` to install sdist from a path.  So I suggest configuring 
+tox to use the wheel for package installation.
+
+```ini
+
+[testenv]
+package = wheel
+```
+
 
 ## Installation
 
